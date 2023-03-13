@@ -1,19 +1,21 @@
 from bs4 import BeautifulSoup
 import csv
+import requests
 
 
 def get_data(url):
     # Парсим данные
-    # headers = {
-    #     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-    # }
-    # requestss = requests.get(url, headers)
-    # print(requestss.text)
-    # with open("test.html", "w", encoding='utf-8') as file:
-    #     file.write(requestss.text)
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+    }
+    requestss = requests.get(url, headers)
+    print(requestss.text)
+    with open("test.html", "wb") as file:
+        file.write(requestss.content)
+
 
     #  Сохраняем в файл
-    with open("test.html", encoding='utf-8') as file:
+    with open("test.html") as file:
         scr = file.read()
 
     # Создаем табличку с заголовками
@@ -56,6 +58,5 @@ def get_data(url):
                     vendor_code.strip(),
                 )
             )
-
 
 get_data("https://www.shop-project.ru/")
